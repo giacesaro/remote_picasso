@@ -1,58 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-function App() {
+import {
+  BrowserRouter as Router,
+  Routes ,Route
+} from "react-router-dom";
+
+import Monitoring from './app/components/Monitoring';
+import Report from './app/components/Report';
+import Settings from './app/components/Settings';
+import ControlloFlussi from './app/components/ControlloFlussi';
+
+const App = (props) => {
+
+  //const history = createBrowserHistory();
+  const { classes } = props;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+   
+      <Router>
+        <Routes>
+            <Route exact path="/monitoring" element={<Monitoring/>} /*classes={classes}*//>
+            <Route exact path="/report" element={<Report/>} /*classes={classes}*//>
+            <Route exact path="/settings" element={<Settings/>} /*classes={classes}*//>
+            <Route exact path="/controlloFlussi" element={<ControlloFlussi/>} /*classes={classes}*//>
+        </Routes>
+    </Router>
+
   );
 }
+
+App.defaultProps = {
+  componentTitle: 'Picasso Component'
+}
+
+App.propTypes = {
+  componentTitle: PropTypes.string
+};
 
 export default App;
